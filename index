@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ========== META & SEO ========== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ahmed Azeez Hasan – Public Health Specialist / Epidemiologist. Ph.D. in Community Medicine & Public Health with 10+ years experience in teaching, research & community health programs.">
+    <meta name="keywords" content="Ahmed Azeez Hasan, Public Health, Epidemiologist, Iraq, Community Medicine, Research">
+    <meta name="author" content="Ahmed Azeez Hasan">
+    <meta name="robots" content="index,follow">
+    <title>Ahmed Azeez Hasan – Public Health Specialist / Epidemiologist</title>
+
+    <!-- ========== FAVICON ========== -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- ========== TAILWIND (CDN) ========== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ========== CUSTOM CSS ========== -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- ========== FEATHER ICONS ========== -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+
+    <!-- ========== HEADER / NAV ========== -->
+    <header id="header" class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#hero" class="text-lg font-bold text-[var(--color-primary)]">Dr. Ahmed Azeez Hasan</a>
+
+            <!-- Hamburger -->
+            <button id="menu-toggle" aria-label="Toggle navigation" class="md:hidden">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Nav links -->
+            <nav id="nav-links" class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="hover:text-[var(--color-primary)] transition">About</a>
+                <a href="#education" class="hover:text-[var(--color-primary)] transition">Education</a>
+                <a href="#experience" class="hover:text-[var(--color-primary)] transition">Experience</a>
+                <a href="#skills" class="hover:text-[var(--color-primary)] transition">Skills</a>
+                <a href="#profiles" class="hover:text-[var(--color-primary)] transition">Profiles</a>
+            </nav>
+
+            <!-- Theme toggle -->
+            <button id="theme-toggle" aria-label="Toggle theme" class="ml-4">
+                <i data-feather="sun" id="icon-light" class="w-5 h-5 hidden"></i>
+                <i data-feather="moon" id="icon-dark" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Mobile nav -->
+        <nav id="mobile-nav" class="hidden md:hidden flex-col px-4 pb-4 space-y-2">
+            <a href="#about" class="block py-1">About</a>
+            <a href="#education" class="block py-1">Education</a>
+            <a href="#experience" class="block py-1">Experience</a>
+            <a href="#skills" class="block py-1">Skills</a>
+            <a href="#profiles" class="block py-1">Profiles</a>
+        </nav>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero" class="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center gap-10">
+        <div class="md:w-2/3">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Ahmed Azeez Hasan</h1>
+            <p class="text-xl md:text-2xl text-[var(--color-primary)] font-semibold mt-2">Public Health Specialist / Epidemiologist</p>
+            <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-xl">
+                Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice.
+            </p>
+            <div class="mt-6 flex gap-4">
+                <a href="assets/CV.pdf" download class="btn-primary">Download CV</a>
+                <a href="#contact" class="btn-secondary">Contact</a>
+            </div>
+        </div>
+        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg">
+            <img src="assets/avatar.png" alt="Ahmed Azeez Hasan" class="w-full h-full object-cover">
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="bg-slate-100 dark:bg-slate-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">About</h2>
+            <p class="max-w-3xl mb-6">
+                Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice. Currently serving at Wasit Health District, with more than 10 years of experience in training health workers and contributing to community health programs. Also involved in teaching medical students at Wasit College of Medicine. Holds a WHO e-Instructor certification and Training of Trainers (ToT) qualification, with a strong interest in health education, applied research, and capacity building.
+            </p>
+
+            <!-- Contact card -->
+            <div id="contact" class="max-w-sm bg-white dark:bg-slate-700 rounded-lg shadow p-6 space-y-3">
+                <h3 class="font-semibold text-lg">Contact</h3>
+                <p><i data-feather="phone" class="inline w-4 h-4 mr-2"></i>+964 7724265093</p>
+                <p>
+                    <i data-feather="mail" class="inline w-4 h-4 mr-2"></i>
+                    <span id="email-text">ahmed.azeez1987@gmail.com</span>
+                    <button id="copy-email" aria-label="Copy email" class="ml-2 text-[var(--color-primary)]">
+                        <i data-feather="copy" class="w-4 h-4"></i>
+                    </button>
+                </p>
+                <p><i data-feather="map-pin" class="inline w-4 h-4 mr-2"></i>Kut City, Wasit Governorate, Iraq</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EDUCATION ========== -->
+    <section id="education" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10">Education</h2>
+            <div class="relative border-l-2 border-[var(--color-primary)] pl-8 space-y-10">
+                <!-- Ph.D. -->
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <h3 class="text-xl font-semibold">Ph.D. in Community Medicine and Public Health</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Universiti Sains Malaysia (2021–2025)</p>
+                    <p class="mt-1">Focus: Epidemiology of Infectious Diseases</p>
+                </div>
+
+                <!-- Master’s -->
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <h3 class="text-xl font-semibold">Master’s Degree in Community Health</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Middle Technical University, Baghdad, Iraq (2015–2018)</p>
+                    <p class="mt-1">GPA: 79.84%</p>
+                </div>
+
+                <!-- Bachelor’s -->
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <h3 class="text-xl font-semibold">Bachelor’s Degree in Community Health</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Middle Technical University, Baghdad, Iraq (2006–2010)</p>
+                    <p class="mt-1">Graduated 2010</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EXPERIENCE ========== -->
+    <section id="experience" class="bg-slate-100 dark:bg-slate-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-10">Experience</h2>
+            <div class="relative border-l-2 border-[var(--color-secondary)] pl-8 space-y-10">
+                <!-- PhD Researcher -->
+                <div class="timeline-item">
+                    <span class="timeline-dot-secondary"></span>
+                    <h3 class="text-xl font-semibold">PhD Researcher</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Universiti Sains Malaysia (2021–2025)</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li>Research in Community Medicine and Public Health</li>
+                        <li>Postgraduate Student Representative</li>
+                        <li>Journal Club Representative</li>
+                    </ul>
+                </div>
+
+                <!-- Community Health Specialist -->
+                <div class="timeline-item">
+                    <span class="timeline-dot-secondary"></span>
+                    <h3 class="text-xl font-semibold">Community Health Specialist</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Public Health Department of Wasit, Iraq (2018–2021)</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li>Maternal and Child Health Division</li>
+                        <li>Training on ANC, IMNCH, EmONC</li>
+                    </ul>
+                </div>
+
+                <!-- Earlier roles -->
+                <div class="timeline-item">
+                    <span class="timeline-dot-secondary"></span>
+                    <h3 class="text-xl font-semibold">Public Health Department of Wasit, Iraq</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">2010–2015</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li>Communicable Diseases & Health Visitor Units (2011–2013)</li>
+                        <li>Medical & Pharmacy Unit (2013–2014)</li>
+                        <li>Antenatal & Postnatal Care (2014–2015)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">Skills</h2>
+            <ul class="list-disc list-inside space-y-2 max-w-xl">
+                <li>Public health and epidemiological study design</li>
+                <li>SEM and path analysis (Mplus)</li>
+                <li>Instrument development, adaptation, and validation</li>
+                <li>JAMOVI, JASP, R, and Mplus</li>
+                <li>Health worker training (ToT certified)</li>
+                <li>WHO e-Instructor certified</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== ONLINE PROFILES ========== -->
+    <section id="profiles" class="bg-slate-100 dark:bg-slate-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">Online Profiles</h2>
+            <ul class="space-y-2">
+                <li><a href="https://linkedin.com/in/ahmed-a-hasan" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">LinkedIn: Ahmed A. Hasan</a></li>
+                <li><a href="https://orcid.org/0000-0002-9004-9689" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">ORCID: https://orcid.org/0000-0002-9004-9689</a></li>
+                <li><a href="https://scholar.google.com/citations?user=ahmedazizhasan" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">Google Scholar: Ahmed Aziz Hasan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== LANGUAGES ========== -->
+    <section id="languages" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">Languages</h2>
+            <p>Arabic (Native), English (Fluent)</p>
+        </div>
+    </section>
+
+    <!-- ========== REFERENCES ========== -->
+    <section id="references" class="bg-slate-100 dark:bg-slate-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">References</h2>
+            <ul class="space-y-4">
+                <li>
+                    <p class="font-semibold">Assoc. Prof. Dr. Najib Majdi Yaacob</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Unit of Biostatistic and Research Methods, USM</p>
+                    <p class="text-sm">+60-19-946 2312 – <a href="mailto:najibmy@usm.my" class="text-[var(--color-primary)] hover:underline">najibmy@usm.my</a></p>
+                </li>
+                <li>
+                    <p class="font-semibold">Dr. Anis Kausar Ghazali</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Unit of Biostatistic and Research Methods, USM</p>
+                    <p class="text-sm">+60-11-628 4953 – <a href="mailto:anisq@usm.my" class="text-[var(--color-primary)] hover:underline">anisq@usm.my</a></p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
+        © 2024 Ahmed Azeez Hasan
+    </footer>
+
+    <!-- ========== TOAST ========== -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow hidden">Email copied!</div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="scripts.js"></script>
+    <script>feather.replace();</script>
+</body>
+</html>
