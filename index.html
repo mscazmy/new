@@ -3,674 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Book Library</title>
+    <title>My Digital Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #ecf0f1;
-            --accent-color: #3498db;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-            --max-width: 1200px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
             line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
         }
-
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
+        
         header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
             text-align: center;
-            margin-bottom: 3rem;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
         h1 {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
-
+        
         .subtitle {
             font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
+            opacity: 0.9;
         }
-
-        .search-container {
-            margin-bottom: 2rem;
-            position: relative;
+        
+        .upload-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
-
-        .search-box {
-            width: 100%;
-            max-width: 500px;
-            padding: 1rem 3rem 1rem 1rem;
-            border: 2px solid var(--accent-color);
+        
+        .upload-btn {
+            display: inline-block;
+            background: #6a11cb;
+            color: white;
+            padding: 12px 24px;
             border-radius: 50px;
-            font-size: 1rem;
-            margin: 0 auto;
-            display: block;
-            background: var(--white);
-            transition: var(--transition);
-        }
-
-        .search-box:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-            border-color: var(--primary-color);
-        }
-
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-tab {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--accent-color);
-            background: transparent;
-            color: var(--accent-color);
-            border-radius: 25px;
             cursor: pointer;
-            transition: var(--transition);
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
             font-weight: 600;
         }
-
-        .filter-tab:hover,
-        .filter-tab.active {
-            background: var(--accent-color);
-            color: var(--white);
+        
+        .upload-btn:hover {
+            background: #2575fc;
             transform: translateY(-2px);
         }
-
+        
+        .library-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-left: 5px solid #6a11cb;
+            padding-left: 15px;
+        }
+        
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
         }
-
+        
         .book-card {
-            background: var(--white);
-            border-radius: 15px;
+            background-color: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
         }
-
+        
         .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
+        
         .book-cover {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            height: 200px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
+            color: white;
+            font-size: 4rem;
         }
-
-        .book-cover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="books" patternUnits="userSpaceOnUse" width="20" height="20"><rect width="20" height="20" fill="none"/><rect width="2" height="20" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23books)"/></svg>');
-        }
-
-        .book-cover-icon {
-            z-index: 1;
-            position: relative;
-        }
-
+        
         .book-info {
             padding: 1.5rem;
         }
-
+        
         .book-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
-            line-height: 1.3;
+            color: #333;
         }
-
+        
         .book-author {
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-style: italic;
-        }
-
-        .book-category {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: var(--text-dark);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .book-description {
-            color: var(--text-light);
+            color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
-            line-height: 1.5;
         }
-
+        
         .book-actions {
             display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            justify-content: space-between;
         }
-
+        
         .btn {
-            padding: 0.6rem 1.2rem;
+            padding: 8px 15px;
+            border-radius: 5px;
             border: none;
-            border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
-            text-decoration: none;
-            text-align: center;
-            transition: var(--transition);
-            display: inline-flex;
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
+            gap: 5px;
         }
-
-        .btn-primary {
-            background: var(--accent-color);
-            color: var(--white);
+        
+        .read-btn {
+            background: #6a11cb;
+            color: white;
         }
-
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
+        
+        .read-btn:hover {
+            background: #2575fc;
         }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            color: var(--text-dark);
+        
+        .download-btn {
+            background: #f0f0f0;
+            color: #333;
         }
-
-        .btn-secondary:hover {
-            background: #d5dbdb;
-            transform: translateY(-2px);
+        
+        .download-btn:hover {
+            background: #e0e0e0;
         }
-
-        .upload-section {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+        
+        .delete-btn {
+            background: #ff4757;
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-
-        .upload-zone {
-            border: 2px dashed var(--accent-color);
+        
+        .book-card:hover .delete-btn {
+            opacity: 1;
+        }
+        
+        .delete-btn:hover {
+            background: #ff3742;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .storage-info {
+            background-color: white;
             border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .storage-bar {
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .storage-used {
+            height: 100%;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            width: 35%; /* Example usage */
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Modal styles for delete confirmation */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
             padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .upload-zone:hover,
-        .upload-zone.dragover {
-            background: rgba(52, 152, 219, 0.1);
-            border-color: var(--primary-color);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .no-books {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-light);
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stats {
+        
+        .modal-buttons {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
-
-        .stat-item {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
+        
+        .confirm-delete {
+            background: #ff4757;
+            color: white;
         }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent-color);
+        
+        .confirm-delete:hover {
+            background: #ff3742;
         }
-
-        .stat-label {
-            color: var(--text-light);
-            font-size: 0.9rem;
+        
+        .cancel-delete {
+            background: #f0f0f0;
+            color: #333;
         }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
+        
+        .cancel-delete:hover {
+            background: #e0e0e0;
         }
-
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2ed573;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
-
+            
             h1 {
                 font-size: 2rem;
             }
-
-            .books-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .filter-tabs {
-                gap: 0.5rem;
-            }
-
-            .filter-tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .stats {
+            
+            .book-actions {
                 flex-direction: column;
-                align-items: center;
+                gap: 10px;
             }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--white);
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Hidden class */
-        .hidden {
-            display: none !important;
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <h1>My Digital Library</h1>
+            <p class="subtitle">A collection of books hosted on GitHub Pages</p>
+        </div>
+    </header>
+    
     <div class="container">
-        <header>
-            <h1>📚 Digital Book Library</h1>
-            <p class="subtitle">Your Personal Collection of Digital Books</p>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalBooks">0</div>
-                    <div class="stat-label">Total Books</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalCategories">0</div>
-                    <div class="stat-label">Categories</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="totalSize">0 MB</div>
-                    <div class="stat-label">Total Size</div>
-                </div>
+        <section class="upload-section">
+            <h2>Upload New Book</h2>
+            <p>Add books to your digital library (Note: Actual upload requires GitHub repository access)</p>
+            <button class="upload-btn">
+                <i class="fas fa-upload"></i> Select Book Files
+            </button>
+        </section>
+        
+        <section class="storage-info">
+            <h3>GitHub Storage Information</h3>
+            <p>Free GitHub accounts provide <strong>1GB of storage</strong> per repository.</p>
+            <p>Current usage: <strong id="storage-text">350MB of 1GB (35%)</strong></p>
+            <div class="storage-bar">
+                <div class="storage-used" id="storage-bar"></div>
             </div>
-        </header>
-
-        <!-- Upload Section -->
-        <div class="upload-section">
-            <h2>📤 Add New Books</h2>
-            <div class="upload-zone" id="uploadZone">
-                <div class="upload-icon">📁</div>
-                <h3>Drag & Drop PDF files here</h3>
-                <p>or <strong>click to browse</strong></p>
-                <input type="file" id="fileInput" accept=".pdf,.epub,.mobi" multiple hidden>
+        </section>
+        
+        <section class="library-section">
+            <h2 class="section-title">My Book Collection</h2>
+            <div class="books-grid" id="books-container">
+                <!-- Books will be dynamically added here -->
             </div>
-            <p style="margin-top: 1rem; color: var(--text-light); text-align: center;">
-                Supported formats: PDF, EPUB, MOBI | Max size: 100MB per file
-            </p>
-        </div>
-
-        <!-- Search and Filter -->
-        <div class="search-container">
-            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search books by title, author, or category...">
-        </div>
-
-        <div class="filter-tabs">
-            <button class="filter-tab active" data-category="all">All Books</button>
-            <button class="filter-tab" data-category="fiction">Fiction</button>
-            <button class="filter-tab" data-category="non-fiction">Non-Fiction</button>
-            <button class="filter-tab" data-category="academic">Academic</button>
-            <button class="filter-tab" data-category="technical">Technical</button>
-            <button class="filter-tab" data-category="other">Other</button>
-        </div>
-
-        <!-- Books Grid -->
-        <div class="books-grid" id="booksGrid">
-            <!-- Sample books will be added here -->
-        </div>
-
-        <!-- No books message -->
-        <div class="no-books hidden" id="noBooksMessage">
-            <h3>📚 No books found</h3>
-            <p>Upload your first book to get started!</p>
-        </div>
-
-        <footer class="footer">
-            <h3>🌟 GitHub Pages Book Library</h3>
-            <p>Built with HTML, CSS, and JavaScript. Host your digital books for free on GitHub Pages!</p>
-            <p><strong>Storage Tips:</strong></p>
-            <ul style="text-align: left; max-width: 600px; margin: 1rem auto;">
-                <li>Keep individual files under 100MB</li>
-                <li>Total repository size should stay under 1GB</li>
-                <li>Consider using external hosting for large collections</li>
-                <li>Optimize PDFs to reduce file sizes</li>
-            </ul>
-        </footer>
+        </section>
     </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete "<span id="book-to-delete"></span>"?</p>
+            <p class="book-author" id="author-to-delete"></p>
+            <div class="modal-buttons">
+                <button class="btn confirm-delete" id="confirmDelete">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button class="btn cancel-delete" id="cancelDelete">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Book deleted successfully!</span>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Hosted on GitHub Pages • Storage: 1GB Free</p>
+        </div>
+    </footer>
 
     <script>
-        // Sample book data - Replace with your actual books
-        let books = [
-            {
-                id: 1,
-                title: "Introduction to Public Health",
-                author: "Dr. Sarah Johnson",
-                category: "academic",
-                description: "Comprehensive guide to public health principles and practices.",
-                filename: "intro-public-health.pdf",
-                size: "15.2 MB",
-                dateAdded: "2024-01-15"
-            },
-            {
-                id: 2,
-                title: "Data Science for Healthcare",
-                author: "Prof. Michael Chen",
-                category: "technical",
-                description: "Applied data science techniques in healthcare analytics.",
-                filename: "data-science-healthcare.pdf",
-                size: "23.8 MB",
-                dateAdded: "2024-01-20"
-            },
-            {
-                id: 3,
-                title: "Epidemiology Methods",
-                author: "Dr. Ahmed Hassan",
-                category: "academic",
-                description: "Advanced methods in epidemiological research and analysis.",
-                filename: "epidemiology-methods.pdf",
-                size: "18.5 MB",
-                dateAdded: "2024-01-25"
-            }
+        // Sample book data
+        const books = [
+            { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald", size: 15 },
+            { id: 2, title: "To Kill a Mockingbird", author: "Harper Lee", size: 20 },
+            { id: 3, title: "1984", author: "George Orwell", size: 18 },
+            { id: 4, title: "Pride and Prejudice", author: "Jane Austen", size: 22 },
+            { id: 5, title: "The Catcher in the Rye", author: "J.D. Salinger", size: 16 },
+            { id: 6, title: "Brave New World", author: "Aldous Huxley", size: 19 }
         ];
 
-        let currentFilter = 'all';
-        let searchTerm = '';
+        // Initialize storage data
+        let totalStorage = 1000; // 1GB in MB
+        let usedStorage = 350; // Starting storage used in MB
 
-        // Initialize the library
-        function initLibrary() {
+        // DOM elements
+        const booksContainer = document.getElementById('books-container');
+        const storageText = document.getElementById('storage-text');
+        const storageBar = document.getElementById('storage-bar');
+        const deleteModal = document.getElementById('deleteModal');
+        const bookToDeleteElement = document.getElementById('book-to-delete');
+        const authorToDeleteElement = document.getElementById('author-to-delete');
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        const cancelDeleteBtn = document.getElementById('cancelDelete');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Variables to track deletion
+        let bookToDelete = null;
+
+        // Initialize the page
+        function init() {
             renderBooks();
-            updateStats();
-            setupEventListeners();
+            updateStorageDisplay();
+            
+            // Add event listeners
+            confirmDeleteBtn.addEventListener('click', handleDelete);
+            cancelDeleteBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside
+            deleteModal.addEventListener('click', function(e) {
+                if (e.target === deleteModal) {
+                    closeModal();
+                }
+            });
+            
+            // Upload button functionality
+            document.querySelector('.upload-btn').addEventListener('click', function() {
+                alert('In a real implementation, this would open a file selector to upload books to your GitHub repository.');
+            });
         }
 
-        // Render books based on current filter and search
+        // Render books to the page
         function renderBooks() {
-            const booksGrid = document.getElementById('booksGrid');
-            const noBooksMessage = document.getElementById('noBooksMessage');
+            booksContainer.innerHTML = '';
             
-            let filteredBooks = books.filter(book => {
-                const matchesCategory = currentFilter === 'all' || book.category === currentFilter;
-                const matchesSearch = searchTerm === '' || 
-                    book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    book.category.toLowerCase().includes(searchTerm.toLowerCase());
-                
-                return matchesCategory && matchesSearch;
-            });
-
-            if (filteredBooks.length === 0) {
-                booksGrid.classList.add('hidden');
-                noBooksMessage.classList.remove('hidden');
-                return;
-            }
-
-            booksGrid.classList.remove('hidden');
-            noBooksMessage.classList.add('hidden');
-
-            booksGrid.innerHTML = filteredBooks.map(book => `
-                <div class="book-card" data-category="${book.category}">
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
                     <div class="book-cover">
-                        <div class="book-cover-icon">📖</div>
+                        <i class="fas fa-book"></i>
                     </div>
+                    <button class="btn delete-btn" data-id="${book.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
                     <div class="book-info">
                         <h3 class="book-title">${book.title}</h3>
-                        <p class="book-author">by ${book.author}</p>
-                        <span class="book-category">${book.category}</span>
-                        <p class="book-description">${book.description}</p>
+                        <p class="book-author">${book.author}</p>
                         <div class="book-actions">
-                            <a href="./books/${book.filename}" class="btn btn-primary" target="_blank">
-                                📖 Read Online
-                            </a>
-                            <a href="./books/${book.filename}" class="btn btn-secondary" download>
-                                💾 Download (${book.size})
-                            </a>
+                            <button class="btn read-btn">
+                                <i class="fas fa-book-open"></i> Read
+                            </button>
+                            <button class="btn download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </button>
                         </div>
                     </div>
-                </div>
-            `).join('');
-        }
-
-        // Update statistics
-        function updateStats() {
-            const totalBooks = books.length;
-            const categories = [...new Set(books.map(book => book.category))].length;
-            const totalSize = books.reduce((sum, book) => {
-                const sizeNum = parseFloat(book.size.replace(' MB', ''));
-                return sum + sizeNum;
-            }, 0);
-
-            document.getElementById('totalBooks').textContent = totalBooks;
-            document.getElementById('totalCategories').textContent = categories;
-            document.getElementById('totalSize').textContent = `${totalSize.toFixed(1)} MB`;
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Search functionality
-            document.getElementById('searchBox').addEventListener('input', (e) => {
-                searchTerm = e.target.value;
-                renderBooks();
-            });
-
-            // Filter tabs
-            document.querySelectorAll('.filter-tab').forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    // Remove active class from all tabs
-                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    e.target.classList.add('active');
-                    
-                    // Update current filter
-                    currentFilter = e.target.getAttribute('data-category');
-                    
-                    // Re-render books
-                    renderBooks();
+                `;
+                
+                booksContainer.appendChild(bookCard);
+                
+                // Add event listeners for the buttons
+                const readBtn = bookCard.querySelector('.read-btn');
+                const downloadBtn = bookCard.querySelector('.download-btn');
+                const deleteBtn = bookCard.querySelector('.delete-btn');
+                
+                readBtn.addEventListener('click', () => {
+                    alert(`Opening "${book.title}" for reading.`);
+                });
+                
+                downloadBtn.addEventListener('click', () => {
+                    alert(`Downloading "${book.title}".`);
+                });
+                
+                deleteBtn.addEventListener('click', () => {
+                    openDeleteModal(book);
                 });
             });
-
-            // File upload functionality
-            const fileInput = document.getElementById('fileInput');
-            const uploadZone = document.getElementById('uploadZone');
-
-            uploadZone.addEventListener('click', () => {
-                fileInput.click();
-            });
-
-            uploadZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadZone.classList.add('dragover');
-            });
-
-            uploadZone.addEventListener('dragleave', () => {
-                uploadZone.classList.remove('dragover');
-            });
-
-            uploadZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadZone.classList.remove('dragover');
-                handleFiles(e.dataTransfer.files);
-            });
-
-            fileInput.addEventListener('change', (e) => {
-                handleFiles(e.target.files);
-            });
         }
 
-        // Handle file uploads (client-side preview only)
-        function handleFiles(files) {
-            Array.from(files).forEach(file => {
-                if (file.size > 100 * 1024 * 1024) { // 100MB limit
-                    alert(`File "${file.name}" is too large. Maximum size is 100MB.`);
-                    return;
-                }
+        // Open the delete confirmation modal
+        function openDeleteModal(book) {
+            bookToDelete = book;
+            bookToDeleteElement.textContent = book.title;
+            authorToDeleteElement.textContent = `by ${book.author}`;
+            deleteModal.style.display = 'flex';
+        }
 
-                // Create preview of uploaded book
-                const newBook = {
-                    id: books.length + 1,
-                    title: file.name.replace(/\.[^/.]+$/, ""), // Remove extension
-                    author: "Unknown Author",
-                    category: "other",
-                    description: "Recently uploaded book. Click to edit details.",
-                    filename: file.name,
-                    size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
-                    dateAdded: new Date().toISOString().split('T')[0]
-                };
+        // Close the modal
+        function closeModal() {
+            deleteModal.style.display = 'none';
+            bookToDelete = null;
+        }
 
-                books.unshift(newBook); // Add to beginning
+        // Handle book deletion
+        function handleDelete() {
+            if (!bookToDelete) return;
+            
+            // Remove book from the array
+            const index = books.findIndex(book => book.id === bookToDelete.id);
+            if (index !== -1) {
+                books.splice(index, 1);
+                
+                // Update storage usage
+                usedStorage -= bookToDelete.size;
+                updateStorageDisplay();
+                
+                // Re-render books
                 renderBooks();
-                updateStats();
                 
                 // Show success message
-                showToast(`📚 "${file.name}" added successfully!`);
-            });
+                showToast(`"${bookToDelete.title}" has been deleted.`);
+            }
+            
+            closeModal();
+        }
+
+        // Update storage display
+        function updateStorageDisplay() {
+            const percentage = Math.round((usedStorage / totalStorage) * 100);
+            storageText.textContent = `${usedStorage}MB of ${totalStorage}MB (${percentage}%)`;
+            storageBar.style.width = `${percentage}%`;
+            
+            // Change color if storage is almost full
+            if (percentage > 90) {
+                storageBar.style.background = 'linear-gradient(135deg, #ff4757 0%, #ff3742 100%)';
+            } else if (percentage > 70) {
+                storageBar.style.background = 'linear-gradient(135deg, #ffa502 0%, #ff7f00 100%)';
+            } else {
+                storageBar.style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
+            }
         }
 
         // Show toast notification
         function showToast(message) {
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--accent-color);
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                box-shadow: var(--shadow);
-                z-index: 1000;
-                transform: translateX(400px);
-                transition: var(--transition);
-            `;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
             setTimeout(() => {
-                toast.style.transform = 'translateX(0)';
-            }, 100);
-
-            setTimeout(() => {
-                toast.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    document.body.removeChild(toast);
-                }, 300);
+                toast.classList.remove('show');
             }, 3000);
         }
 
-        // Initialize the library when page loads
-        document.addEventListener('DOMContentLoaded', initLibrary);
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + K to focus search
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                document.getElementById('searchBox').focus();
-            }
-        });
+        // Initialize the page when loaded
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
