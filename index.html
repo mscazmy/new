@@ -1,246 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ========== META & SEO ========== -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Ahmed Azeez Hasan – Public Health Specialist / Epidemiologist. Ph.D. in Community Medicine & Public Health with 10+ years experience in teaching, research & community health programs.">
-    <meta name="keywords" content="Ahmed Azeez Hasan, Public Health, Epidemiologist, Iraq, Community Medicine, Research">
-    <meta name="author" content="Ahmed Azeez Hasan">
-    <meta name="robots" content="index,follow">
-    <title>Ahmed Azeez Hasan – Public Health Specialist / Epidemiologist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Book Library</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #ecf0f1;
+            --accent-color: #3498db;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --max-width: 1200px;
+        }
 
-    <!-- ========== FAVICON ========== -->
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- ========== TAILWIND (CDN) ========== -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-    <!-- ========== CUSTOM CSS ========== -->
-    <link rel="stylesheet" href="styles.css">
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-    <!-- ========== FEATHER ICONS ========== -->
-    <script src="https://unpkg.com/feather-icons"></script>
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem 3rem 1rem 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            font-size: 1rem;
+            margin: 0 auto;
+            display: block;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--accent-color);
+            background: transparent;
+            color: var(--accent-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .book-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="books" patternUnits="userSpaceOnUse" width="20" height="20"><rect width="20" height="20" fill="none"/><rect width="2" height="20" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23books)"/></svg>');
+        }
+
+        .book-cover-icon {
+            z-index: 1;
+            position: relative;
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .book-author {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .book-category {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .book-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #d5dbdb;
+            transform: translateY(-2px);
+        }
+
+        .upload-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--accent-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--secondary-color);
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .no-books {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Digital Book Library</h1>
+            <p class="subtitle">Your Personal Collection of Digital Books</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalBooks">0</div>
+                    <div class="stat-label">Total Books</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalCategories">0</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalSize">0 MB</div>
+                    <div class="stat-label">Total Size</div>
+                </div>
+            </div>
+        </header>
 
-    <!-- ========== HEADER / NAV ========== -->
-    <header id="header" class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="#hero" class="text-lg font-bold text-[var(--color-primary)]">Dr. Ahmed Azeez Hasan</a>
-
-            <!-- Hamburger -->
-            <button id="menu-toggle" aria-label="Toggle navigation" class="md:hidden">
-                <i data-feather="menu" class="w-6 h-6"></i>
-            </button>
-
-            <!-- Nav links -->
-            <nav id="nav-links" class="hidden md:flex items-center space-x-6">
-                <a href="#about" class="hover:text-[var(--color-primary)] transition">About</a>
-                <a href="#education" class="hover:text-[var(--color-primary)] transition">Education</a>
-                <a href="#experience" class="hover:text-[var(--color-primary)] transition">Experience</a>
-                <a href="#skills" class="hover:text-[var(--color-primary)] transition">Skills</a>
-                <a href="#profiles" class="hover:text-[var(--color-primary)] transition">Profiles</a>
-            </nav>
-
-            <!-- Theme toggle -->
-            <button id="theme-toggle" aria-label="Toggle theme" class="ml-4">
-                <i data-feather="sun" id="icon-light" class="w-5 h-5 hidden"></i>
-                <i data-feather="moon" id="icon-dark" class="w-5 h-5"></i>
-            </button>
-        </div>
-
-        <!-- Mobile nav -->
-        <nav id="mobile-nav" class="hidden md:hidden flex-col px-4 pb-4 space-y-2">
-            <a href="#about" class="block py-1">About</a>
-            <a href="#education" class="block py-1">Education</a>
-            <a href="#experience" class="block py-1">Experience</a>
-            <a href="#skills" class="block py-1">Skills</a>
-            <a href="#profiles" class="block py-1">Profiles</a>
-        </nav>
-    </header>
-
-    <!-- ========== HERO ========== -->
-    <section id="hero" class="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center gap-10">
-        <div class="md:w-2/3">
-            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Ahmed Azeez Hasan</h1>
-            <p class="text-xl md:text-2xl text-[var(--color-primary)] font-semibold mt-2">Public Health Specialist / Epidemiologist</p>
-            <p class="mt-4 text-slate-600 dark:text-slate-300 max-w-xl">
-                Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice.
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h2>📤 Add New Books</h2>
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">📁</div>
+                <h3>Drag & Drop PDF files here</h3>
+                <p>or <strong>click to browse</strong></p>
+                <input type="file" id="fileInput" accept=".pdf,.epub,.mobi" multiple hidden>
+            </div>
+            <p style="margin-top: 1rem; color: var(--text-light); text-align: center;">
+                Supported formats: PDF, EPUB, MOBI | Max size: 100MB per file
             </p>
-            <div class="mt-6 flex gap-4">
-                <a href="assets/CV.pdf" download class="btn-primary">Download CV</a>
-                <a href="#contact" class="btn-secondary">Contact</a>
-            </div>
         </div>
-        <div class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg">
-            <img src="assets/avatar.png" alt="Ahmed Azeez Hasan" class="w-full h-full object-cover">
+
+        <!-- Search and Filter -->
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search books by title, author, or category...">
         </div>
-    </section>
 
-    <!-- ========== ABOUT ========== -->
-    <section id="about" class="bg-slate-100 dark:bg-slate-800 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">About</h2>
-            <p class="max-w-3xl mb-6">
-                Public health professional with a Ph.D. in Community Medicine and Public Health and over 5 years of experience in teaching and research, particularly in epidemiology, biostatistics, and public health practice. Currently serving at Wasit Health District, with more than 10 years of experience in training health workers and contributing to community health programs. Also involved in teaching medical students at Wasit College of Medicine. Holds a WHO e-Instructor certification and Training of Trainers (ToT) qualification, with a strong interest in health education, applied research, and capacity building.
-            </p>
-
-            <!-- Contact card -->
-            <div id="contact" class="max-w-sm bg-white dark:bg-slate-700 rounded-lg shadow p-6 space-y-3">
-                <h3 class="font-semibold text-lg">Contact</h3>
-                <p><i data-feather="phone" class="inline w-4 h-4 mr-2"></i>+964 7724265093</p>
-                <p>
-                    <i data-feather="mail" class="inline w-4 h-4 mr-2"></i>
-                    <span id="email-text">ahmed.azeez1987@gmail.com</span>
-                    <button id="copy-email" aria-label="Copy email" class="ml-2 text-[var(--color-primary)]">
-                        <i data-feather="copy" class="w-4 h-4"></i>
-                    </button>
-                </p>
-                <p><i data-feather="map-pin" class="inline w-4 h-4 mr-2"></i>Kut City, Wasit Governorate, Iraq</p>
-            </div>
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">All Books</button>
+            <button class="filter-tab" data-category="fiction">Fiction</button>
+            <button class="filter-tab" data-category="non-fiction">Non-Fiction</button>
+            <button class="filter-tab" data-category="academic">Academic</button>
+            <button class="filter-tab" data-category="technical">Technical</button>
+            <button class="filter-tab" data-category="other">Other</button>
         </div>
-    </section>
 
-    <!-- ========== EDUCATION ========== -->
-    <section id="education" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-10">Education</h2>
-            <div class="relative border-l-2 border-[var(--color-primary)] pl-8 space-y-10">
-                <!-- Ph.D. -->
-                <div class="timeline-item">
-                    <span class="timeline-dot"></span>
-                    <h3 class="text-xl font-semibold">Ph.D. in Community Medicine and Public Health</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Universiti Sains Malaysia (2021–2025)</p>
-                    <p class="mt-1">Focus: Epidemiology of Infectious Diseases</p>
-                </div>
-
-                <!-- Master’s -->
-                <div class="timeline-item">
-                    <span class="timeline-dot"></span>
-                    <h3 class="text-xl font-semibold">Master’s Degree in Community Health</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Middle Technical University, Baghdad, Iraq (2015–2018)</p>
-                    <p class="mt-1">GPA: 79.84%</p>
-                </div>
-
-                <!-- Bachelor’s -->
-                <div class="timeline-item">
-                    <span class="timeline-dot"></span>
-                    <h3 class="text-xl font-semibold">Bachelor’s Degree in Community Health</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Middle Technical University, Baghdad, Iraq (2006–2010)</p>
-                    <p class="mt-1">Graduated 2010</p>
-                </div>
-            </div>
+        <!-- Books Grid -->
+        <div class="books-grid" id="booksGrid">
+            <!-- Sample books will be added here -->
         </div>
-    </section>
 
-    <!-- ========== EXPERIENCE ========== -->
-    <section id="experience" class="bg-slate-100 dark:bg-slate-800 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-10">Experience</h2>
-            <div class="relative border-l-2 border-[var(--color-secondary)] pl-8 space-y-10">
-                <!-- PhD Researcher -->
-                <div class="timeline-item">
-                    <span class="timeline-dot-secondary"></span>
-                    <h3 class="text-xl font-semibold">PhD Researcher</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Universiti Sains Malaysia (2021–2025)</p>
-                    <ul class="list-disc list-inside mt-1 space-y-1">
-                        <li>Research in Community Medicine and Public Health</li>
-                        <li>Postgraduate Student Representative</li>
-                        <li>Journal Club Representative</li>
-                    </ul>
-                </div>
-
-                <!-- Community Health Specialist -->
-                <div class="timeline-item">
-                    <span class="timeline-dot-secondary"></span>
-                    <h3 class="text-xl font-semibold">Community Health Specialist</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Public Health Department of Wasit, Iraq (2018–2021)</p>
-                    <ul class="list-disc list-inside mt-1 space-y-1">
-                        <li>Maternal and Child Health Division</li>
-                        <li>Training on ANC, IMNCH, EmONC</li>
-                    </ul>
-                </div>
-
-                <!-- Earlier roles -->
-                <div class="timeline-item">
-                    <span class="timeline-dot-secondary"></span>
-                    <h3 class="text-xl font-semibold">Public Health Department of Wasit, Iraq</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">2010–2015</p>
-                    <ul class="list-disc list-inside mt-1 space-y-1">
-                        <li>Communicable Diseases & Health Visitor Units (2011–2013)</li>
-                        <li>Medical & Pharmacy Unit (2013–2014)</li>
-                        <li>Antenatal & Postnatal Care (2014–2015)</li>
-                    </ul>
-                </div>
-            </div>
+        <!-- No books message -->
+        <div class="no-books hidden" id="noBooksMessage">
+            <h3>📚 No books found</h3>
+            <p>Upload your first book to get started!</p>
         </div>
-    </section>
 
-    <!-- ========== SKILLS ========== -->
-    <section id="skills" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">Skills</h2>
-            <ul class="list-disc list-inside space-y-2 max-w-xl">
-                <li>Public health and epidemiological study design</li>
-                <li>SEM and path analysis (Mplus)</li>
-                <li>Instrument development, adaptation, and validation</li>
-                <li>JAMOVI, JASP, R, and Mplus</li>
-                <li>Health worker training (ToT certified)</li>
-                <li>WHO e-Instructor certified</li>
+        <footer class="footer">
+            <h3>🌟 GitHub Pages Book Library</h3>
+            <p>Built with HTML, CSS, and JavaScript. Host your digital books for free on GitHub Pages!</p>
+            <p><strong>Storage Tips:</strong></p>
+            <ul style="text-align: left; max-width: 600px; margin: 1rem auto;">
+                <li>Keep individual files under 100MB</li>
+                <li>Total repository size should stay under 1GB</li>
+                <li>Consider using external hosting for large collections</li>
+                <li>Optimize PDFs to reduce file sizes</li>
             </ul>
-        </div>
-    </section>
+        </footer>
+    </div>
 
-    <!-- ========== ONLINE PROFILES ========== -->
-    <section id="profiles" class="bg-slate-100 dark:bg-slate-800 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">Online Profiles</h2>
-            <ul class="space-y-2">
-                <li><a href="https://linkedin.com/in/ahmed-a-hasan" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">LinkedIn: Ahmed A. Hasan</a></li>
-                <li><a href="https://orcid.org/0000-0002-9004-9689" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">ORCID: https://orcid.org/0000-0002-9004-9689</a></li>
-                <li><a href="https://scholar.google.com/citations?user=ahmedazizhasan" target="_blank" rel="noopener" class="text-[var(--color-primary)] hover:underline">Google Scholar: Ahmed Aziz Hasan</a></li>
-            </ul>
-        </div>
-    </section>
+    <script>
+        // Sample book data - Replace with your actual books
+        let books = [
+            {
+                id: 1,
+                title: "Introduction to Public Health",
+                author: "Dr. Sarah Johnson",
+                category: "academic",
+                description: "Comprehensive guide to public health principles and practices.",
+                filename: "intro-public-health.pdf",
+                size: "15.2 MB",
+                dateAdded: "2024-01-15"
+            },
+            {
+                id: 2,
+                title: "Data Science for Healthcare",
+                author: "Prof. Michael Chen",
+                category: "technical",
+                description: "Applied data science techniques in healthcare analytics.",
+                filename: "data-science-healthcare.pdf",
+                size: "23.8 MB",
+                dateAdded: "2024-01-20"
+            },
+            {
+                id: 3,
+                title: "Epidemiology Methods",
+                author: "Dr. Ahmed Hassan",
+                category: "academic",
+                description: "Advanced methods in epidemiological research and analysis.",
+                filename: "epidemiology-methods.pdf",
+                size: "18.5 MB",
+                dateAdded: "2024-01-25"
+            }
+        ];
 
-    <!-- ========== LANGUAGES ========== -->
-    <section id="languages" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">Languages</h2>
-            <p>Arabic (Native), English (Fluent)</p>
-        </div>
-    </section>
+        let currentFilter = 'all';
+        let searchTerm = '';
 
-    <!-- ========== REFERENCES ========== -->
-    <section id="references" class="bg-slate-100 dark:bg-slate-800 py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">References</h2>
-            <ul class="space-y-4">
-                <li>
-                    <p class="font-semibold">Assoc. Prof. Dr. Najib Majdi Yaacob</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Unit of Biostatistic and Research Methods, USM</p>
-                    <p class="text-sm">+60-19-946 2312 – <a href="mailto:najibmy@usm.my" class="text-[var(--color-primary)] hover:underline">najibmy@usm.my</a></p>
-                </li>
-                <li>
-                    <p class="font-semibold">Dr. Anis Kausar Ghazali</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-400">Unit of Biostatistic and Research Methods, USM</p>
-                    <p class="text-sm">+60-11-628 4953 – <a href="mailto:anisq@usm.my" class="text-[var(--color-primary)] hover:underline">anisq@usm.my</a></p>
-                </li>
-            </ul>
-        </div>
-    </section>
+        // Initialize the library
+        function initLibrary() {
+            renderBooks();
+            updateStats();
+            setupEventListeners();
+        }
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="text-center py-6 text-sm text-slate-500 dark:text-slate-400">
-        © 2024 Ahmed Azeez Hasan
-    </footer>
+        // Render books based on current filter and search
+        function renderBooks() {
+            const booksGrid = document.getElementById('booksGrid');
+            const noBooksMessage = document.getElementById('noBooksMessage');
+            
+            let filteredBooks = books.filter(book => {
+                const matchesCategory = currentFilter === 'all' || book.category === currentFilter;
+                const matchesSearch = searchTerm === '' || 
+                    book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    book.category.toLowerCase().includes(searchTerm.toLowerCase());
+                
+                return matchesCategory && matchesSearch;
+            });
 
-    <!-- ========== TOAST ========== -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow hidden">Email copied!</div>
+            if (filteredBooks.length === 0) {
+                booksGrid.classList.add('hidden');
+                noBooksMessage.classList.remove('hidden');
+                return;
+            }
 
-    <!-- ========== SCRIPTS ========== -->
-    <script src="scripts.js"></script>
-    <script>feather.replace();</script>
+            booksGrid.classList.remove('hidden');
+            noBooksMessage.classList.add('hidden');
+
+            booksGrid.innerHTML = filteredBooks.map(book => `
+                <div class="book-card" data-category="${book.category}">
+                    <div class="book-cover">
+                        <div class="book-cover-icon">📖</div>
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">by ${book.author}</p>
+                        <span class="book-category">${book.category}</span>
+                        <p class="book-description">${book.description}</p>
+                        <div class="book-actions">
+                            <a href="./books/${book.filename}" class="btn btn-primary" target="_blank">
+                                📖 Read Online
+                            </a>
+                            <a href="./books/${book.filename}" class="btn btn-secondary" download>
+                                💾 Download (${book.size})
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update statistics
+        function updateStats() {
+            const totalBooks = books.length;
+            const categories = [...new Set(books.map(book => book.category))].length;
+            const totalSize = books.reduce((sum, book) => {
+                const sizeNum = parseFloat(book.size.replace(' MB', ''));
+                return sum + sizeNum;
+            }, 0);
+
+            document.getElementById('totalBooks').textContent = totalBooks;
+            document.getElementById('totalCategories').textContent = categories;
+            document.getElementById('totalSize').textContent = `${totalSize.toFixed(1)} MB`;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('searchBox').addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderBooks();
+            });
+
+            // Filter tabs
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    e.target.classList.add('active');
+                    
+                    // Update current filter
+                    currentFilter = e.target.getAttribute('data-category');
+                    
+                    // Re-render books
+                    renderBooks();
+                });
+            });
+
+            // File upload functionality
+            const fileInput = document.getElementById('fileInput');
+            const uploadZone = document.getElementById('uploadZone');
+
+            uploadZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+        }
+
+        // Handle file uploads (client-side preview only)
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (file.size > 100 * 1024 * 1024) { // 100MB limit
+                    alert(`File "${file.name}" is too large. Maximum size is 100MB.`);
+                    return;
+                }
+
+                // Create preview of uploaded book
+                const newBook = {
+                    id: books.length + 1,
+                    title: file.name.replace(/\.[^/.]+$/, ""), // Remove extension
+                    author: "Unknown Author",
+                    category: "other",
+                    description: "Recently uploaded book. Click to edit details.",
+                    filename: file.name,
+                    size: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
+                    dateAdded: new Date().toISOString().split('T')[0]
+                };
+
+                books.unshift(newBook); // Add to beginning
+                renderBooks();
+                updateStats();
+                
+                // Show success message
+                showToast(`📚 "${file.name}" added successfully!`);
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--accent-color);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                z-index: 1000;
+                transform: translateX(400px);
+                transition: var(--transition);
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                toast.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize the library when page loads
+        document.addEventListener('DOMContentLoaded', initLibrary);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchBox').focus();
+            }
+        });
+    </script>
 </body>
 </html>
